@@ -1,10 +1,15 @@
 package com.gzwork.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author Gzwork
  */
 public class User {
+    @NotNull(message = "{user_id_valid}")
     private Integer userId;
+    @NotBlank(message = "{user_name_valid}")
     private String userName;
     private String userPwd;
     private String userSex;
