@@ -1,4 +1,3 @@
-package com.gzwork.groovy.impl;
 
 import com.gzwork.groovy.GroovyServ;
 

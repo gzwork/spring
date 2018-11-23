@@ -33,7 +33,7 @@ public class GroovyTest {
 
     private String getScript() {
         try {
-            File file = ResourceUtils.getFile("H:/idea/gzwork/spring/src/main/java/com/gzwork/groovy/impl/GroovyServImpl.groovy");
+            File file = ResourceUtils.getFile("classpath:groovy/GroovyServImpl.groovy");
             Reader fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);
             String s;
