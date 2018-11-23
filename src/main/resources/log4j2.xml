@@ -6,7 +6,19 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <Logger name="com.gzwork.aop"
+                level="INFO"/>
+        <Logger name="org.springframework.test"
+                level="ERROR"/>
+        <Logger name="org.springframework"
+                level="INFO"/>
+        <Logger name="org.mybatis"
+                level="INFO"/>
+        <Logger name="org.apache"
+                level="INFO"/>
+        <Logger name="com.alibaba.druid.pool"
+                level="INFO"/>
+        <Root level="DEBUG">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

@@ -7,7 +7,8 @@
                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <mvc:annotation-driven>
+    <mvc:annotation-driven
+            validator="validator">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
@@ -15,7 +16,9 @@
                         <!-- 处理responseBody 里面日期类型 -->
                         <property name="dateFormat">
                             <bean class="java.text.SimpleDateFormat">
-                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+                                <constructor-arg
+                                        type="java.lang.String"
+                                        value="yyyy-MM-dd HH:mm:ss"/>
                             </bean>
                         </property>
                         <!-- 为null字段时不显示 -->
@@ -35,6 +38,46 @@
                      allowed-methods="GET,POST,PUT,DELETE,OPTIONS"/>
     </mvc:cors>
 
+    <!-- ctrl方法入参校验 -->
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">
+        <property
+                name="validator"
+                ref="validator"/>
+    </bean>
+
+    <!-- 校验器，配置validator -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property
+                name="providerClass"
+                value="org.hibernate.validator.HibernateValidator"/>
+        <property
+                name="validationMessageSource"
+                ref="validationMessageSource"/>
+    </bean>
+
+    <!-- 配置validationMessageSource -->
+    <bean id="validationMessageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 指定校验信息的资源文件的基本文件名称，不包括后缀，后缀默认是properties -->
+        <property
+                name="basenames">
+            <list>
+                <value>
+                    classpath:valid/validationMsg
+                </value>
+            </list>
+        </property>
+        <!-- 指定文件的编码 -->
+        <property
+                name="fileEncodings"
+                value="utf8"></property>
+        <!-- 对资源文件内容缓存的时间，单位秒 -->
+        <property
+                name="cacheSeconds"
+                value="120"></property>
+    </bean>
+
     <context:component-scan base-package="com.gzwork.ctrl">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
@@ -47,16 +90,26 @@
         <property name="suffix" value=".jsp"/>
         <property name="order" value="1"/>
     </bean>
-    
+
     <!-- 配置freeMarker视图解析器 -->
     <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
         <property name="contentType" value="text/html; charset=UTF-8"/>
-        <property name="exposeRequestAttributes" value="true" />
-        <property name="exposeSessionAttributes" value="true" />
-        <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="cache" value="true" />
-        <property name="suffix" value=".ftl" />
+        <property
+                name="exposeRequestAttributes"
+                value="true"/>
+        <property
+                name="exposeSessionAttributes"
+                value="true"/>
+        <property
+                name="exposeSpringMacroHelpers"
+                value="true"/>
+        <property
+                name="cache"
+                value="true"/>
+        <property
+                name="suffix"
+                value=".ftl"/>
         <property name="order" value="0"/>
     </bean>
     <!-- 配置freeMarker的模板路径 -->
@@ -64,7 +117,8 @@
         <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
         <property name="freemarkerVariables">
             <map>
-                <entry key="xml_escape" value-ref="fmXmlEscape" />
+                <entry key="xml_escape"
+                       value-ref="fmXmlEscape"/>
             </map>
         </property>
         <property name="defaultEncoding" value="UTF-8"/>

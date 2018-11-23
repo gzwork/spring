@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringFacetInspection -->
+<beans:beans
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/security"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                               http://www.springframework.org/schema/beans/spring-beans.xsd
+                                               http://www.springframework.org/schema/security
+                                               http://www.springframework.org/schema/security/spring-security.xsd">
+    <!-- 密码验证 -->
+    <beans:bean
+            id="passwordEncoder"
+            class="com.gzwork.common.PasswordEncoderImpl"
+            scope="singleton"/>
+
+    <http auto-config="true"
+          use-expressions="false">
+        <intercept-url
+                pattern="/**"
+                access="ROLE_SPITTER"/>
+    </http>
+
+    <user-service
+            id="userService">
+        <user name="gzwork"
+              password="admin"
+              authorities="ROLE_SPITTER"/>
+    </user-service>
+
+    <authentication-manager>
+        <authentication-provider
+                user-service-ref="userService"/>
+    </authentication-manager>
+
+
+</beans:beans>

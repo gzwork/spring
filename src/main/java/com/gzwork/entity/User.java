@@ -1,10 +1,18 @@
 package com.gzwork.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author Gzwork
  */
 public class User {
+    @NotNull(message = "{user_id_valid}")
     private Integer userId;
+    @NotBlank(message = "{user_name_valid}")
     private String userName;
     private String userPwd;
     private String userSex;
@@ -63,12 +71,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userPwd='" + userPwd + '\'' +
-                ", userSex='" + userSex + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

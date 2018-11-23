@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 配置默认的执行器 -->
+        <setting
+                name="defaultExecutorType"
+                value="REUSE"/>
+        <!-- 日志名称的前缀 -->
+        <setting
+                name="logPrefix"
+                value="mybatis3-"/>
+        <!-- 设置mybatis内置日志工厂 -->
+        <setting
+                name="logImpl"
+                value="LOG4J2"/>
+        <!-- 开启自动驼峰命名规则（camel case）映射 -->
+        <setting
+                name="mapUnderscoreToCamelCase"
+                value="true"/>
+    </settings>
+</configuration>
