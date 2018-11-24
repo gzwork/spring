@@ -1,6 +1,7 @@
 package com.gzwork.test;
 
 import com.gzwork.entity.User;
+import com.gzwork.groovy.GroovyServ;
 import com.gzwork.servers.UserServ;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,9 @@ public class SpringTest {
     @Autowired
     private UserServ userServ;
 
+    @Autowired
+    private GroovyServ groovyServ;
+
     @Test
     public void getUserById() {
         User user = new User();
@@ -22,9 +26,7 @@ public class SpringTest {
     }
 
     @Test
-    public void groovy() {
-
+    public void groovyServ() {
+        System.out.println(groovyServ.say("Gzwork"));
     }
-
-
 }

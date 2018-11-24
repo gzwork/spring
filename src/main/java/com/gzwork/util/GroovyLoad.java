@@ -10,7 +10,7 @@ import java.util.Map;
 public final class GroovyLoad {
 
 
-    private static final Map<String, Object> dict = new HashMap<>();
+    private static final Map<String, Object> DICT = new HashMap<>();
 
     private GroovyLoad() {
 
@@ -26,13 +26,13 @@ public final class GroovyLoad {
      */
     public static <T> T getObjectByScript(String script) {
         String key = DigestUtils.md5Hex(script);
-        Object object = dict.get(key);
+        Object object = DICT.get(key);
         if (null == object) {
             GroovyClassLoader classLoader = new GroovyClassLoader();
             Class clazz = classLoader.parseClass(script);
             try {
                 Object o = clazz.newInstance();
-                dict.put(key, o);
+                DICT.put(key, o);
                 return (T) o;
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
