@@ -39,7 +39,7 @@ public class GroovyBeanLoad implements ApplicationContextAware, ApplicationListe
     }
 
     /**
-     * 定时任务，每天晚上1点删除数据表t_tempClob中的所有记录
+     * 定时加载脚本，默认是10秒重新加载一次
      */
     @Scheduled(cron = "0/10 * * * * ? ")
     private void refreshGroovyBean() {

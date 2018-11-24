@@ -36,6 +36,5 @@ public class GroovyTest implements ApplicationListener<GroovyBeanReloadEvent> {
     public void onApplicationEvent(GroovyBeanReloadEvent event) {
         ApplicationContext context = (ApplicationContext) event.getSource();
         groovyServ = context.getBean(GroovyServ.class);
-        System.out.println("做点什么");
     }
 }
